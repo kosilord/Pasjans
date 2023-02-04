@@ -2,6 +2,8 @@
 #include <fstream>
 #include <algorithm>
 #include <random>
+#include <stack>
+#include <map>
 
 
 void read_value(std::vector<Cards>& card) {
@@ -43,12 +45,35 @@ void shuffle_stack(std::vector<Cards>& stack_of_cards) {
 	std::random_shuffle(stack_of_cards.begin(), stack_of_cards.end());
 }
 
+std::map<int,std::vector<Cards>> table_initiation(std::vector<Cards>& cards_all) {
+	std::vector<Cards> usable_cards;
+	std::map<int, std::vector<Cards>> map_cards;
+	for (int i{ 1 }; i  <= 7; i++) {
+		for (int j{ 0 }; j < i; j++) {
+			usable_cards.push_back(cards_all.back());
+			if(i-j==1) usable_cards.back().visibility = 1;
+			cards_all.pop_back();
+		}
+		map_cards.insert(std::make_pair(i, usable_cards));
+		usable_cards.clear();
+	}
+	return map_cards;
+}
+
+
 int main() {
-	std::vector<Cards> stack;
-	read_value(stack);
-	shuffle_stack(stack);
-	for (Cards card : stack) {
+	std::vector<Cards> talia;
+	read_value(talia);
+	shuffle_stack(talia);
+	std::map<int, std::vector<Cards>> usable_cards = table_initiation(talia);
+	for (Cards card : talia) {
 		std::cout << card;
+	}
+	std::cout << " ------------------------" << "end of talia " << std::endl;
+	for (int i{ 1 }; i <= 7; i++) {
+		for (Cards card : usable_cards.at(i))
+			std::cout << card;
+		std::cout << "                       " << i << std::endl;
 	}
 	return 0;
 }

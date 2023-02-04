@@ -11,8 +11,8 @@ private:
     int Value;
     std::string Name;
     std::string Color;
-
 public:
+    int visibility{0};
     Cards() : Value{ 0 }, Name{ "New" }, Color{ "nullptr"} {};
     Cards(int value, std::string name, std::string color)
         : Value{ value }, Name{ name }, Color{ color } {};
@@ -20,6 +20,7 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const Cards& card);
     bool operator< (const Cards& ref_card);
     bool is_less_one(const Cards& ref_card);
+    bool operator==(const Cards& ref_card);
     ~Cards() {};
 };
 #endif
