@@ -5,21 +5,22 @@
 #include <iostream>
 #include <vector>
 #include <iomanip>
-
+#include <windows.h>
 class Cards {
 private:
     int Value;
     std::string Name;
-    std::string Color;
+    int Color;
 public:
     int visibility{0};
-    Cards() : Value{ 0 }, Name{ "New" }, Color{ "nullptr"} {};
-    Cards(int value, std::string name, std::string color)
+    Cards() : Value{ 0 }, Name{ "New" }, Color{ -1 } {};
+    Cards(int value, std::string name, int color)
         : Value{ value }, Name{ name }, Color{ color } {};
-    void set_value(const int &value,const std::string& name, const std::string& color);
+    void set_value(const int &value,const std::string& name, const int& color);
     friend std::ostream& operator<<(std::ostream& os, const Cards& card);
+    int get_value();
     bool operator< (const Cards& ref_card);
-    bool is_less_one(const Cards& ref_card);
+    bool this_can_move(const Cards& ref_card);
     bool operator==(const Cards& ref_card);
     ~Cards() {};
 };
