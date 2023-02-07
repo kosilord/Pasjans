@@ -60,12 +60,12 @@ std::map<int, std::vector<Cards>> table_initiation(std::vector<Cards>& cards_all
 	std::vector<Cards> cards_desire;
 	for (int i{ 8 }; i < 12; i++) {
 		if (i >= 10) {
-			Cards cards_d{ 0,"Hearths/Diamonds",0 };//reverse color initiation to allow function can move to move ;c
+			Cards cards_d{ 0,"Hearths/Diamonds",1 };//reverse color initiation to allow function can move to move ;c
 			cards_d.visibility = 1;
 			cards_desire.push_back(cards_d);
 		}
 		if (i < 10) {
-			Cards cards_d{ 0,"Clubs/Spades",1 };
+			Cards cards_d{ 0,"Clubs/Spades",0 };
 			cards_d.visibility = 1;
 			cards_desire.push_back(cards_d);
 		}
@@ -121,8 +121,9 @@ void make_a_move(std::map<int, std::vector<Cards>>& cards_player, int move_from 
 	}
 	std::cout << std::endl << "Where you want to move it ? : ";
 	std::cin >> move_to;
-	if (move_to <=7) {
-		if (cards_player[move_to].size()==0) {
+
+	if (move_to <=7 && cards_player[move_from].size()>how_many) {
+		if (cards_player[move_to].size()==0 &&cards_player[move_from].size()) {
 			if (cards_player.at(move_from).at(cards_player[move_from].size() - how_many).get_value() == 13);
 			{  cards_player[move_to].insert(cards_player[move_to].end(), std::make_move_iterator(cards_player[move_from].end() - how_many),
 				std::make_move_iterator(cards_player[move_from].end()));
@@ -132,15 +133,17 @@ void make_a_move(std::map<int, std::vector<Cards>>& cards_player, int move_from 
 			}
 		}
 		else if (cards_player[move_from].at(cards_player[move_from].size() - how_many).this_can_move(cards_player[move_to].back())
-			&& cards_player[move_from].at(cards_player[move_from].size() - how_many).visibility == 1 ) 
-			{ cards_player[move_to].insert(cards_player[move_to].end(), std::make_move_iterator(cards_player[move_from].end() - how_many),
-																	std::make_move_iterator(cards_player[move_from].end()));
+				&& cards_player[move_from].at(cards_player[move_from].size() - how_many).visibility == 1 ) 
+			{ 
+			cards_player[move_to].insert(cards_player[move_to].end(), std::make_move_iterator(cards_player[move_from].end() - how_many),
+				std::make_move_iterator(cards_player[move_from].end()));
 			cards_player[move_from].erase(cards_player[move_from].end() - how_many, cards_player[move_from].end());
 			if (cards_player[move_from].size() != 0 && cards_player[move_from].back().visibility == 0)cards_player[move_from].back().visibility = 1;
 			else std::cout << "Cant make that move" << std::endl;
 			};
+
 	}else if(move_to >=8 && move_to <=11 && how_many==1){
-		if (cards_player[move_to].back().this_can_move(cards_player[move_from].back())) // using reverse function to save on many function in reverse should work
+		if (cards_player[move_from].back().this_move_to_desire(cards_player[move_to].back())) // using reverse function to save on many function in reverse should work
 		{
 			cards_player[move_to].push_back(cards_player[move_from].back());
 			cards_player[move_from].pop_back();
@@ -150,8 +153,11 @@ void make_a_move(std::map<int, std::vector<Cards>>& cards_player, int move_from 
 	}
 	}
 
-void change_talia() {
-
+void change_talia(std::map<int, std::vector<Cards>>& cards_player) {
+	cards_player[12].back().visibility = 0;
+	cards_player[12].insert(cards_player[12].begin(), cards_player[12].back());
+	cards_player[12].pop_back();
+	cards_player[12].back().visibility = 1;
 }
 
 int main() {
@@ -160,10 +166,29 @@ int main() {
 	read_value(talia);
 	shuffle_stack(talia);
 	std::map<int, std::vector<Cards>> usable_cards = table_initiation(talia);
-	display_cards_table(usable_cards);
+
 	while (gra == true) {
 		display_cards_table(usable_cards);
-		make_a_move(usable_cards);
+		std::string choice;
+		std::cout << " What you want to do ?" << std::endl;
+		std::cout << "1 - Move Card\n" << "2 - Change_reverse\n" << "3 - Quit game" << std::endl;
+		std::cin >> choice;
+		int real_choice{ 0 };
+		if (stoi(choice))
+		{
+			real_choice = stoi(choice);
+			switch (real_choice) {
+			case 1:
+				make_a_move(usable_cards);
+				break;
+			case 2:
+				change_talia(usable_cards);
+				break;
+			case 3:
+				gra = false;
+				break;
+			}
+		}
 	}
 	return 0;
 }

@@ -27,6 +27,9 @@ bool Cards::operator< (const Cards& ref_card) {
 bool Cards::this_can_move(const Cards& ref_card) {
     return (this->Value - ref_card.Value == -1 && this->Color != ref_card.Color);
 }
+bool Cards::this_move_to_desire(const Cards& ref_card) {
+    return (this->Value - ref_card.Value == 1 && this->Color == ref_card.Color);
+}
 
 bool Cards::operator==(const Cards& ref_card){
     return ((this->Value == ref_card.Value) && (this->Color == ref_card.Color));

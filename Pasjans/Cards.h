@@ -18,6 +18,7 @@ public:
         : Value{ value }, Name{ name }, Color{ color } {};
     void set_value(const int &value,const std::string& name, const int& color);
     friend std::ostream& operator<<(std::ostream& os, const Cards& card);
+    bool this_move_to_desire(const Cards& ref_card);
     int get_value();
     bool operator< (const Cards& ref_card);
     bool this_can_move(const Cards& ref_card);
