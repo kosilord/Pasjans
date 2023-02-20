@@ -23,6 +23,7 @@ public:
     bool operator< (const Cards& ref_card);
     bool this_can_move(const Cards& ref_card);
     bool operator==(const Cards& ref_card);
+    std::string prep_to_save();
     ~Cards() {};
 };
 #endif
