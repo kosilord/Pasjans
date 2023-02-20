@@ -3,7 +3,7 @@ Welcome in solitare game.
 This game architecture base on created class.
 And on stl map conteiner.
 
-To make it hapened i create std::pair<int,std::vector<std::string>
+To make it hapened i create std::pair<int,std::vector<std::string>>
 
 Moves are made by taking cards from  1 place at map to another if conditions to move are satisfied.
 
@@ -15,3 +15,4 @@ There is function to save as to load game from txt file.
 
 But first initiation is made by taking cards from csv file.
 
+Will be glad to my issues with this code tkanks <3
