@@ -14,5 +14,3 @@ You won the game when you get all cards on stacks 8-11.
 There is function to save as to load game from txt file.
 
 But first initiation is made by taking cards from csv file.
-
-Will be glad to my issues with this code tkanks <3
