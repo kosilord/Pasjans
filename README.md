@@ -11,6 +11,6 @@ Stacks are created from 1-12 to simplify initiation.
 
 You won the game when you get all cards on stacks 8-11.
 
-There is function to save as to load game from txt file.
+There is function " save as " to save game progress.
 
 But first initiation is made by taking cards from csv file.
