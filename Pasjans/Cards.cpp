@@ -13,17 +13,15 @@ std::ostream& operator<<(std::ostream& os, const Cards& card) {
         else if (card.Color == 2) set_color(14);
         else if (card.Color == 3) set_color(12);
         else if (card.Color == 4) set_color(13);
-        os << std::setw(5) << card.Value << " " << std::setw(20) << std::left << card.Name;
+        os << std::setw(5) << card.Value << " " << std::setw(19) << std::left << card.Name << std::right;
         set_color(15);
     }
     else {
         set_color(15);
-        os << std::setw(12) << std::right << "Hidden" << "-" << std::setw(12) << std::left << "Card";
+        os << std::setw(12) << "Hidden" << " " << std::setw(12) << std::left << "Card" <<std::right;
     }
     return os;
 }
-
-
 
 bool Cards::operator< (const Cards& ref_card) {
     return this->Value > ref_card.Value;

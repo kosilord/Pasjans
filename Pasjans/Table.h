@@ -105,7 +105,7 @@ inline void display_cards_table(std::map<int, std::vector<Cards>> cards_player) 
 	std::cout << std::endl << std::setfill('-') << std::setw(175) << "-" << std::setfill(' ') << std::endl;;
 	for (int j{ 0 }; j < max_size; j++) {
 		for (int i{ 1 }; i <= 7; i++) {
-			if (cards_player.at(i).size() > j)std::cout << cards_player[i][j];
+			if (cards_player.at(i).size() > j) std::cout <<cards_player[i][j];
 			else std::cout << std::setw(25) << " ";
 		}
 		std::cout << std::endl << std::setw(175) << " " << std::endl;

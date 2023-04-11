@@ -177,7 +177,7 @@ inline bool Game() {
 	bool end{ false };
 	std::map<int, std::vector<Cards>> usable_cards;
 	How_start_game(usable_cards,end);
-	char decision{'0'};
+	std::string decision{"0"};
 	while (end == false) {
 		end = end_game(usable_cards); 
 		display_cards_table(usable_cards);
@@ -186,8 +186,9 @@ inline bool Game() {
 		std::cout << "Move Card : [1]\n" << "Change card to drow : [2]\n" << "Save Game : [3]\n"<< "Quit game : [4]" << std::endl;
 		while (choice == false) {
 			try {
+				std::cout << "\nYour move : ";
 				std::cin >> decision;
-				if (decision != '1' && decision != '2' && decision != '3' && decision !='4') throw Error_invalid_move();
+				if (decision != "1" && decision != "2" && decision != "3" && decision !="4") throw Error_invalid_move();
 				choice = true;
 			}
 			catch (const Error_invalid_move& ex) {
@@ -195,7 +196,7 @@ inline bool Game() {
 				std::cerr << ex.what();
 			}
 		}
-		switch (decision) {
+		switch (decision.at(0)) {
 		case '1':
 			make_a_move(usable_cards);
 			break;
@@ -206,20 +207,20 @@ inline bool Game() {
 			save_game(usable_cards);
 			break;
 		}
-		if (decision == '4') {
+		if (decision.at(0) == '4') {
 			choice = false;
 			while (choice == false) {
 				try {
 					std::cout << "Would you like to save progres  [y/n]?\n";
 					std::cin >> decision;
-					if (decision != 'y' && decision != 'n') throw Error_invalid_choice_save();
+					if (decision != "y" && decision != "n") throw Error_invalid_choice_save();
 					choice = true;
 				}
 				catch (const Error_invalid_choice_save& ex) {
 					std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 					std::cerr << ex.what();
 				}
-				if (decision == 'y') save_game(usable_cards);
+				if (decision == "y") save_game(usable_cards);
 			}
 			end = true;
 		}
