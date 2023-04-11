@@ -29,12 +29,12 @@ bool Cards::operator< (const Cards& ref_card) {
     return this->Value > ref_card.Value;
 }
 
-bool Cards::this_can_move(const Cards& ref_card) {
+bool Cards::this_move_1_7__12(const Cards& ref_card) {
     if((this->Value - ref_card.Value == -1) && ((this->Color == 3 || this->Color ==4) && (ref_card.Color==1 || ref_card.Color==2))) return true;
     if ((this->Value - ref_card.Value == -1) && ((this->Color == 1 || this->Color == 2) && (ref_card.Color == 3 || ref_card.Color == 4))) return true;
     return false;
 }
-bool Cards::this_move_to_desire(const Cards& ref_card) {
+bool Cards::this_move_8_11(const Cards& ref_card) {
     return (this->Value - ref_card.Value == 1 && this->Color == ref_card.Color);
 }
 

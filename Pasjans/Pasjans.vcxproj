@@ -127,7 +127,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Źródło.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Table.h" />
+    <ClCompile Include="Game.h" />
     <ClCompile Include="Cards.cpp" />
   </ItemGroup>
   <ItemGroup>
