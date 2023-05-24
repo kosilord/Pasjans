@@ -43,6 +43,15 @@ public:
 	}
 };
 
+class Error_opening_save : std::exception {
+public:
+	Error_opening_save() noexcept = default;
+	~Error_opening_save() = default;
+	virtual const char* what() const noexcept {
+		return "There is no save file in your directory \n Try to look for file named save.txt \n";
+	}
+};
+
 class Error_invalid_choice_save : std::exception {
 public:
 	Error_invalid_choice_save() noexcept = default;
