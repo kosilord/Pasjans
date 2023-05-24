@@ -1,4 +1,4 @@
-#include "Table.h"
+#include "Table.cpp"
 #include <algorithm>
 #include <tuple>
 // function check if the passed string is a intiger;
